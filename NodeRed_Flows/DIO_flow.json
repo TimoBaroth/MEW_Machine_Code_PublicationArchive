@@ -1,0 +1,268 @@
+[
+    {
+        "id": "6041d3e1c84bb0a3",
+        "type": "tab",
+        "label": "Digital I/O",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0bf5d1a7a5b1206e",
+        "type": "ui_switch",
+        "z": "6041d3e1c84bb0a3",
+        "name": "",
+        "label": "Collector vacuum",
+        "tooltip": "",
+        "group": "4e376d885fdbc460",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 270,
+        "y": 60,
+        "wires": [
+            [
+                "4dfb51774734f2c7"
+            ]
+        ]
+    },
+    {
+        "id": "4dfb51774734f2c7",
+        "type": "mqtt out",
+        "z": "6041d3e1c84bb0a3",
+        "name": "",
+        "topic": "MEWRP4/DIO/CollectorVacuum",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 530,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "2140543adffddee5",
+        "type": "inject",
+        "z": "6041d3e1c84bb0a3",
+        "name": "Initiate",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "0bf5d1a7a5b1206e"
+            ]
+        ]
+    },
+    {
+        "id": "35439090de8c70e3",
+        "type": "mqtt in",
+        "z": "6041d3e1c84bb0a3",
+        "name": "",
+        "topic": "MEWRP4/DIO/LimitSwitchSafetyTriggered",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "2eb68e75d225180b",
+                "6bcca27491031fe0"
+            ]
+        ]
+    },
+    {
+        "id": "2eb68e75d225180b",
+        "type": "ui_template",
+        "z": "6041d3e1c84bb0a3",
+        "group": "4e376d885fdbc460",
+        "name": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<div layout=\"row\" layout-align=\"space-between center\" style=\"padding: 0 6px;\">\n    <p>Limit switch safety triggered</p>\n    <font color=\"{{msg.payload ? 'red' : 'grey'}}\">\n        <i class=\"fa fa-circle\" aria-hidden=\"true\"></i>\n    </font>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ddfd989ac099961",
+        "type": "mqtt in",
+        "z": "6041d3e1c84bb0a3",
+        "name": "",
+        "topic": "MEWRP4/DIO/HVPowerSupply",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "de47a1ecbb1649f6",
+                "e2dd439ea546136f"
+            ]
+        ]
+    },
+    {
+        "id": "de47a1ecbb1649f6",
+        "type": "ui_template",
+        "z": "6041d3e1c84bb0a3",
+        "group": "4e376d885fdbc460",
+        "name": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<div layout=\"row\" layout-align=\"space-between center\" style=\"padding: 0 6px;\">\n    <p>HV Power Supply</p>\n    <font color=\"{{msg.payload ? 'green' : 'grey'}}\">\n        <i class=\"fa fa-circle\" aria-hidden=\"true\"></i>\n    </font>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 500,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e2dd439ea546136f",
+        "type": "link out",
+        "z": "6041d3e1c84bb0a3",
+        "name": "HVPowerSupply",
+        "mode": "link",
+        "links": [
+            "d7890ee37da14ba7",
+            "f774905bd0230faa"
+        ],
+        "x": 455,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "80acc3f7571d757a",
+        "type": "link in",
+        "z": "6041d3e1c84bb0a3",
+        "name": "DIOOff",
+        "links": [
+            "03954116e4d3a2e4"
+        ],
+        "x": 245,
+        "y": 200,
+        "wires": [
+            [
+                "2eb68e75d225180b",
+                "de47a1ecbb1649f6"
+            ]
+        ]
+    },
+    {
+        "id": "6bcca27491031fe0",
+        "type": "link out",
+        "z": "6041d3e1c84bb0a3",
+        "name": "LimitSwitchSafetyTriggered",
+        "mode": "link",
+        "links": [
+            "5a477c9e43f52eab"
+        ],
+        "x": 455,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4e376d885fdbc460",
+        "type": "ui_group",
+        "name": "Digital I/O",
+        "tab": "bdf7a1de899b21bb",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "403ce56dee80157d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bdf7a1de899b21bb",
+        "type": "ui_tab",
+        "name": "MEW Machine Control",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

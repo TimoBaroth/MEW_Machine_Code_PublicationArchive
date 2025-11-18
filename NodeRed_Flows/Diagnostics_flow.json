@@ -1,0 +1,956 @@
+[
+    {
+        "id": "235fa872532ef956",
+        "type": "tab",
+        "label": "Diagnostics",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "763872153be01879",
+        "type": "inject",
+        "z": "235fa872532ef956",
+        "name": "Heartbeat",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "fda681ea88e00d75"
+            ]
+        ]
+    },
+    {
+        "id": "fda681ea88e00d75",
+        "type": "mqtt out",
+        "z": "235fa872532ef956",
+        "name": "",
+        "topic": "Diagnostics/NodeRedHeartbeat",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 370,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "99f92a4b21d43ca8",
+        "type": "mqtt in",
+        "z": "235fa872532ef956",
+        "name": "",
+        "topic": "Diagnostics/MEWRP4ProcessingTime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 360,
+        "wires": [
+            [
+                "121652d6c2b02640",
+                "522aa281474997df",
+                "d1e0485920655edb"
+            ]
+        ]
+    },
+    {
+        "id": "121652d6c2b02640",
+        "type": "switch",
+        "z": "235fa872532ef956",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "0.02",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "241cdfe999fca760",
+                "cf9994f20db68fb0",
+                "864e553d158830fb"
+            ],
+            [
+                "de0e5e9ffc2a53dc"
+            ]
+        ]
+    },
+    {
+        "id": "241cdfe999fca760",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Loop time error, processing time:",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "parts",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "94b2379ef738bd3d"
+            ]
+        ]
+    },
+    {
+        "id": "94b2379ef738bd3d",
+        "type": "join",
+        "z": "235fa872532ef956",
+        "name": "",
+        "mode": "custom",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": " ",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 870,
+        "y": 360,
+        "wires": [
+            [
+                "f49ce74e14a7cbae",
+                "91197592f7ddfd36"
+            ]
+        ]
+    },
+    {
+        "id": "cf9994f20db68fb0",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "parts",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 320,
+        "wires": [
+            [
+                "94b2379ef738bd3d"
+            ]
+        ]
+    },
+    {
+        "id": "864e553d158830fb",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "s",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "parts",
+                "pt": "msg",
+                "to": "2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 400,
+        "wires": [
+            [
+                "94b2379ef738bd3d"
+            ]
+        ]
+    },
+    {
+        "id": "f49ce74e14a7cbae",
+        "type": "ui_text",
+        "z": "235fa872532ef956",
+        "group": "16de107619036e4a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "MEW RP4 Processing status:",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1130,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "de0e5e9ffc2a53dc",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Ok",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 460,
+        "wires": [
+            [
+                "f49ce74e14a7cbae"
+            ]
+        ]
+    },
+    {
+        "id": "522aa281474997df",
+        "type": "trigger",
+        "z": "235fa872532ef956",
+        "name": "",
+        "op1": "",
+        "op2": "No response",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 660,
+        "y": 500,
+        "wires": [
+            [
+                "f49ce74e14a7cbae",
+                "ede54df409928e71"
+            ]
+        ]
+    },
+    {
+        "id": "c4eea77a37a58823",
+        "type": "inject",
+        "z": "235fa872532ef956",
+        "name": "startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 440,
+        "y": 500,
+        "wires": [
+            [
+                "522aa281474997df"
+            ]
+        ]
+    },
+    {
+        "id": "1e63bab3c45922fd",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "Monitoring RP4 ",
+        "info": "",
+        "x": 120,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2c0763e1075173cb",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "NodeRed Heartbeat",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "91197592f7ddfd36",
+        "type": "debug",
+        "z": "235fa872532ef956",
+        "d": true,
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d1e0485920655edb",
+        "type": "moving-average",
+        "z": "235fa872532ef956",
+        "name": "Moving average 5 sec/250samples",
+        "amount": "250",
+        "weight": "cumulative",
+        "x": 620,
+        "y": 280,
+        "wires": [
+            [
+                "6e04c5b3d970e1b5"
+            ]
+        ]
+    },
+    {
+        "id": "6e04c5b3d970e1b5",
+        "type": "delay",
+        "z": "235fa872532ef956",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 880,
+        "y": 280,
+        "wires": [
+            [
+                "306edb5a212b4be7"
+            ]
+        ]
+    },
+    {
+        "id": "7a051437cc7afa81",
+        "type": "ui_text",
+        "z": "235fa872532ef956",
+        "group": "16de107619036e4a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Avg. Processing time:",
+        "format": "{{msg.payload}}s",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1320,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "306edb5a212b4be7",
+        "type": "function",
+        "z": "235fa872532ef956",
+        "name": "round, four decimals",
+        "func": "msg.payload = msg.payload.toFixed(4); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 280,
+        "wires": [
+            [
+                "7a051437cc7afa81"
+            ]
+        ]
+    },
+    {
+        "id": "03954116e4d3a2e4",
+        "type": "link out",
+        "z": "235fa872532ef956",
+        "name": "MEWRP4NoResponse",
+        "mode": "link",
+        "links": [
+            "80acc3f7571d757a"
+        ],
+        "x": 975,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ede54df409928e71",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 560,
+        "wires": [
+            [
+                "03954116e4d3a2e4"
+            ]
+        ]
+    },
+    {
+        "id": "06b20b1f17211b29",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "Matlab",
+        "info": "",
+        "x": 90,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a0f0d7dfca67b42b",
+        "type": "link in",
+        "z": "235fa872532ef956",
+        "name": "link in 1",
+        "links": [
+            "f0dbdd3f37580ed4",
+            "fd708452d05a48bf"
+        ],
+        "x": 285,
+        "y": 800,
+        "wires": [
+            [
+                "7d408d7faed0a61e"
+            ]
+        ]
+    },
+    {
+        "id": "a3f3fc9dfa4732cb",
+        "type": "link in",
+        "z": "235fa872532ef956",
+        "name": "link in 2",
+        "links": [
+            "50f67eca0eae2c5c"
+        ],
+        "x": 285,
+        "y": 860,
+        "wires": [
+            [
+                "bdbfeded4c7daf8b"
+            ]
+        ]
+    },
+    {
+        "id": "90f2a903998b360e",
+        "type": "link in",
+        "z": "235fa872532ef956",
+        "name": "link in 3",
+        "links": [
+            "86999364bc63de9a"
+        ],
+        "x": 285,
+        "y": 920,
+        "wires": [
+            [
+                "b58d4c06b55a5843"
+            ]
+        ]
+    },
+    {
+        "id": "5a477c9e43f52eab",
+        "type": "link in",
+        "z": "235fa872532ef956",
+        "name": "link in 4",
+        "links": [
+            "6bcca27491031fe0"
+        ],
+        "x": 285,
+        "y": 740,
+        "wires": [
+            [
+                "46314e0796ba4bf0"
+            ]
+        ]
+    },
+    {
+        "id": "f774905bd0230faa",
+        "type": "link in",
+        "z": "235fa872532ef956",
+        "name": "link in 5",
+        "links": [
+            "e2dd439ea546136f"
+        ],
+        "x": 285,
+        "y": 680,
+        "wires": [
+            [
+                "14c91f8c48c63f3c"
+            ]
+        ]
+    },
+    {
+        "id": "3931999e0d8218c6",
+        "type": "link in",
+        "z": "235fa872532ef956",
+        "name": "link in 6",
+        "links": [
+            "39f41e0045aad07d"
+        ],
+        "x": 285,
+        "y": 980,
+        "wires": [
+            [
+                "d35f033b88dc5cfe"
+            ]
+        ]
+    },
+    {
+        "id": "14c91f8c48c63f3c",
+        "type": "InvertUltimate",
+        "z": "235fa872532ef956",
+        "name": "Invert",
+        "payloadPropName": "payload",
+        "translatorConfig": "",
+        "x": 390,
+        "y": 680,
+        "wires": [
+            [
+                "46314e0796ba4bf0"
+            ]
+        ]
+    },
+    {
+        "id": "7d408d7faed0a61e",
+        "type": "InvertUltimate",
+        "z": "235fa872532ef956",
+        "name": "Invert",
+        "payloadPropName": "payload",
+        "x": 390,
+        "y": 800,
+        "wires": [
+            [
+                "46314e0796ba4bf0"
+            ]
+        ]
+    },
+    {
+        "id": "bdbfeded4c7daf8b",
+        "type": "InvertUltimate",
+        "z": "235fa872532ef956",
+        "name": "Invert",
+        "payloadPropName": "payload",
+        "x": 390,
+        "y": 860,
+        "wires": [
+            [
+                "46314e0796ba4bf0"
+            ]
+        ]
+    },
+    {
+        "id": "b58d4c06b55a5843",
+        "type": "InvertUltimate",
+        "z": "235fa872532ef956",
+        "name": "Invert",
+        "payloadPropName": "payload",
+        "x": 390,
+        "y": 920,
+        "wires": [
+            [
+                "46314e0796ba4bf0"
+            ]
+        ]
+    },
+    {
+        "id": "e815e7189f9504fa",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "HVPowerSupply",
+        "info": "",
+        "x": 100,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "564d1618c567370d",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "LimitSwitchSafetyTriggered",
+        "info": "",
+        "x": 130,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "2f958d4d8c8e38de",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "CartridgeControlOut",
+        "info": "",
+        "x": 110,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "4a346c9c238755cd",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "RingControlOut",
+        "info": "",
+        "x": 100,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "565a09d5e2f1b085",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "PressureControlOut",
+        "info": "",
+        "x": 110,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "4c2dd6d719b587e0",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "HVControlOut",
+        "info": "",
+        "x": 90,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d35f033b88dc5cfe",
+        "type": "InvertUltimate",
+        "z": "235fa872532ef956",
+        "name": "Invert",
+        "payloadPropName": "payload",
+        "x": 390,
+        "y": 980,
+        "wires": [
+            [
+                "46314e0796ba4bf0"
+            ]
+        ]
+    },
+    {
+        "id": "46314e0796ba4bf0",
+        "type": "BooleanLogicUltimate",
+        "z": "235fa872532ef956",
+        "name": "",
+        "payloadPropName": "payload",
+        "filtertrue": "both",
+        "persist": true,
+        "sInitializeWith": "WaitForPayload",
+        "triggertopic": "trigger",
+        "outputtriggeredby": "all",
+        "inputCount": "6",
+        "topic": "result",
+        "restrictinputevaluation": false,
+        "delayEvaluation": 0,
+        "translatorConfig": "",
+        "x": 750,
+        "y": 840,
+        "wires": [
+            [],
+            [
+                "44048411016d605e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "797d9fbd6ed5ed46",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "OR, if something turned off this will trigger",
+        "info": "",
+        "x": 760,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "f61e10dccd5b4c92",
+        "type": "mqtt out",
+        "z": "235fa872532ef956",
+        "name": "",
+        "topic": "MATLAB/ext_stop",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1510,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "44048411016d605e",
+        "type": "delay",
+        "z": "235fa872532ef956",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 950,
+        "y": 840,
+        "wires": [
+            [
+                "d6f2f769ca9b639d"
+            ]
+        ]
+    },
+    {
+        "id": "f44caeb3a2d7bb90",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 860,
+        "wires": [
+            [
+                "f61e10dccd5b4c92"
+            ]
+        ]
+    },
+    {
+        "id": "d6f2f769ca9b639d",
+        "type": "switch",
+        "z": "235fa872532ef956",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1090,
+        "y": 840,
+        "wires": [
+            [
+                "38799ff91085d71d"
+            ],
+            [
+                "f44caeb3a2d7bb90"
+            ]
+        ]
+    },
+    {
+        "id": "38799ff91085d71d",
+        "type": "change",
+        "z": "235fa872532ef956",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 820,
+        "wires": [
+            [
+                "f61e10dccd5b4c92"
+            ]
+        ]
+    },
+    {
+        "id": "eb4610f7c0cc3055",
+        "type": "comment",
+        "z": "235fa872532ef956",
+        "name": "true => 1, false => 0",
+        "info": "",
+        "x": 1270,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "403ce56dee80157d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "16de107619036e4a",
+        "type": "ui_group",
+        "name": "Diagnostics",
+        "tab": "bdf7a1de899b21bb",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bdf7a1de899b21bb",
+        "type": "ui_tab",
+        "name": "MEW Machine Control",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

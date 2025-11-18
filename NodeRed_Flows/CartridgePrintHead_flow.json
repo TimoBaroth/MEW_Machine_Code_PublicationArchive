@@ -1,0 +1,2101 @@
+[
+    {
+        "id": "3f206101676928c3",
+        "type": "tab",
+        "label": "CartridgePrintHead",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "43523a08ef8b38cc",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_CartridgeTemperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1230,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0c333fb76fcc2738",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/CONTROLIN_CartridgeTemperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1420,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "816ac37c4c5a2dee",
+        "type": "ui_switch",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Cartridge heating",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 2,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1010,
+        "y": 100,
+        "wires": [
+            [
+                "0c333fb76fcc2738"
+            ]
+        ]
+    },
+    {
+        "id": "1f9c9ab06b88d636",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/ACT_CartridgeTemperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "5b142c90eb79e77e"
+            ]
+        ]
+    },
+    {
+        "id": "5695f73147d17792",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "d": true,
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/ACT_RelativeHeatingPowerCartridge",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "44dadfba83f5101d"
+            ]
+        ]
+    },
+    {
+        "id": "1051e644ae4f4627",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/CONTROLOUT_CartridgeTemperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "9f484605b4ba570f"
+            ]
+        ]
+    },
+    {
+        "id": "bceaf3f33ea2b2b3",
+        "type": "comment",
+        "z": "3f206101676928c3",
+        "name": "Cartridge Heating",
+        "info": "",
+        "x": 100,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "3ab98305ef206f65",
+        "type": "comment",
+        "z": "3f206101676928c3",
+        "name": "Ring Heating",
+        "info": "",
+        "x": 110,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "c0a0767c0ae41464",
+        "type": "ui_text_input",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Cartridge Setpoint:",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "bc7fe27aa74372e9"
+            ]
+        ]
+    },
+    {
+        "id": "bc7fe27aa74372e9",
+        "type": "range",
+        "z": "3f206101676928c3",
+        "minin": "0",
+        "maxin": "120",
+        "minout": "0",
+        "maxout": "120",
+        "action": "clamp",
+        "round": false,
+        "property": "payload",
+        "name": "Limit input range",
+        "x": 870,
+        "y": 220,
+        "wires": [
+            [
+                "43523a08ef8b38cc",
+                "8261cf5121572f26"
+            ]
+        ]
+    },
+    {
+        "id": "874e522792f5715e",
+        "type": "moving-average",
+        "z": "3f206101676928c3",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 920,
+        "y": 360,
+        "wires": [
+            [
+                "1281d3ac46e3fe04"
+            ]
+        ]
+    },
+    {
+        "id": "720ba095e722bc31",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "Initiate Setpoint",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "c0a0767c0ae41464",
+                "bc7fe27aa74372e9"
+            ]
+        ]
+    },
+    {
+        "id": "1281d3ac46e3fe04",
+        "type": "delay",
+        "z": "3f206101676928c3",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1150,
+        "y": 360,
+        "wires": [
+            [
+                "6be91ea38a54965a"
+            ]
+        ]
+    },
+    {
+        "id": "8261cf5121572f26",
+        "type": "trigger",
+        "z": "3f206101676928c3",
+        "name": "keep setpoint on graph",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1100,
+        "y": 300,
+        "wires": [
+            [
+                "8c932fc30f677c41"
+            ]
+        ]
+    },
+    {
+        "id": "44dadfba83f5101d",
+        "type": "range",
+        "z": "3f206101676928c3",
+        "d": true,
+        "minin": "0",
+        "maxin": "1",
+        "minout": "0",
+        "maxout": "100",
+        "action": "scale",
+        "round": true,
+        "property": "payload",
+        "name": "Scale to percent",
+        "x": 640,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4bb787da3c67f99b",
+        "type": "ui_chart",
+        "z": "3f206101676928c3",
+        "name": "Temperature chart",
+        "group": "df334e7a41570950",
+        "order": 1,
+        "width": 7,
+        "height": 5,
+        "label": "Cartridge temperature",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "20",
+        "ymax": "",
+        "removeOlder": "60",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#e5a50a",
+            "#f9f06b",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1530,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c932fc30f677c41",
+        "type": "change",
+        "z": "3f206101676928c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Setpoint",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 300,
+        "wires": [
+            [
+                "4bb787da3c67f99b"
+            ]
+        ]
+    },
+    {
+        "id": "6be91ea38a54965a",
+        "type": "change",
+        "z": "3f206101676928c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Reading",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 360,
+        "wires": [
+            [
+                "4bb787da3c67f99b",
+                "db0d53a9e5eff44c"
+            ]
+        ]
+    },
+    {
+        "id": "91ed22ad9399d215",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_RingTemperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1120,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6fa80cafd20cec03",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/CONTROLIN_RingTemperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1200,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "4e31b9c3022942b1",
+        "type": "ui_switch",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Ring heating",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 5,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 850,
+        "y": 580,
+        "wires": [
+            [
+                "6fa80cafd20cec03"
+            ]
+        ]
+    },
+    {
+        "id": "3c32a7b8b15c2adf",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/ACT_RingTemperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 840,
+        "wires": [
+            [
+                "21d78c872a61a0c8"
+            ]
+        ]
+    },
+    {
+        "id": "a06844bea0cc611c",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "d": true,
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/ACT_RelativeHeatingPowerRing",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 900,
+        "wires": [
+            [
+                "041f519447cdd4b6"
+            ]
+        ]
+    },
+    {
+        "id": "6c51d116667f14f6",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/CONTROLOUT_RingTemperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "27599f3256480d83"
+            ]
+        ]
+    },
+    {
+        "id": "0a630251035891b8",
+        "type": "ui_text_input",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Ring Setpoint:",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 6,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 600,
+        "y": 640,
+        "wires": [
+            [
+                "36ad816eeb40a008"
+            ]
+        ]
+    },
+    {
+        "id": "36ad816eeb40a008",
+        "type": "range",
+        "z": "3f206101676928c3",
+        "minin": "0",
+        "maxin": "120",
+        "minout": "0",
+        "maxout": "120",
+        "action": "clamp",
+        "round": false,
+        "property": "payload",
+        "name": "Limit input range",
+        "x": 800,
+        "y": 700,
+        "wires": [
+            [
+                "91ed22ad9399d215",
+                "cdc16e6131a57090"
+            ]
+        ]
+    },
+    {
+        "id": "e06374915095bc57",
+        "type": "moving-average",
+        "z": "3f206101676928c3",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 880,
+        "y": 840,
+        "wires": [
+            [
+                "b612c917c31b7f1c"
+            ]
+        ]
+    },
+    {
+        "id": "ad571a0f32802df9",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "Initiate Setpoint",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 400,
+        "y": 700,
+        "wires": [
+            [
+                "0a630251035891b8",
+                "36ad816eeb40a008"
+            ]
+        ]
+    },
+    {
+        "id": "b612c917c31b7f1c",
+        "type": "delay",
+        "z": "3f206101676928c3",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1110,
+        "y": 840,
+        "wires": [
+            [
+                "7f0b1813559f2d38"
+            ]
+        ]
+    },
+    {
+        "id": "cdc16e6131a57090",
+        "type": "trigger",
+        "z": "3f206101676928c3",
+        "name": "keep setpoint on graph",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1030,
+        "y": 780,
+        "wires": [
+            [
+                "39eccc692b0a6277"
+            ]
+        ]
+    },
+    {
+        "id": "041f519447cdd4b6",
+        "type": "range",
+        "z": "3f206101676928c3",
+        "d": true,
+        "minin": "0",
+        "maxin": "1",
+        "minout": "0",
+        "maxout": "100",
+        "action": "scale",
+        "round": true,
+        "property": "payload",
+        "name": "Scale to percent",
+        "x": 580,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39eccc692b0a6277",
+        "type": "change",
+        "z": "3f206101676928c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Setpoint",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1250,
+        "y": 780,
+        "wires": [
+            [
+                "7c29469a7d36353b"
+            ]
+        ]
+    },
+    {
+        "id": "7f0b1813559f2d38",
+        "type": "change",
+        "z": "3f206101676928c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Reading",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 840,
+        "wires": [
+            [
+                "ffbcdb925393cef8",
+                "7c29469a7d36353b"
+            ]
+        ]
+    },
+    {
+        "id": "ee708d8aaf2d0630",
+        "type": "ui_text",
+        "z": "3f206101676928c3",
+        "group": "a16fda5b837af142",
+        "order": 4,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Temperature: ",
+        "format": "{{msg.payload}}°C",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1750,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "db0d53a9e5eff44c",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "round, two decimals",
+        "func": "msg.payload = msg.payload.toFixed(2); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 420,
+        "wires": [
+            [
+                "ee708d8aaf2d0630",
+                "f9716acbdf6f62df"
+            ]
+        ]
+    },
+    {
+        "id": "ffbcdb925393cef8",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "round, two decimals",
+        "func": "msg.payload = msg.payload.toFixed(2); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 900,
+        "wires": [
+            [
+                "7dc04b31052ee14e"
+            ]
+        ]
+    },
+    {
+        "id": "7dc04b31052ee14e",
+        "type": "ui_text",
+        "z": "3f206101676928c3",
+        "group": "a16fda5b837af142",
+        "order": 7,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Temperature:",
+        "format": "{{msg.payload}}°C",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1690,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "7c29469a7d36353b",
+        "type": "ui_chart",
+        "z": "3f206101676928c3",
+        "name": "Temperature chart",
+        "group": "df334e7a41570950",
+        "order": 2,
+        "width": 7,
+        "height": 5,
+        "label": "Ring temperature",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "20",
+        "ymax": "",
+        "removeOlder": "60",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#e5a50a",
+            "#f9f06b",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1490,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f484605b4ba570f",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "Check if control enabled",
+        "func": "msg.payload = msg.payload.split(\",\");\nif (msg.payload[1] == \"Temperature control active:False\") {\n    msg.payload = false;\n} else {\n    msg.payload = true;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 100,
+        "wires": [
+            [
+                "816ac37c4c5a2dee",
+                "f0dbdd3f37580ed4"
+            ]
+        ]
+    },
+    {
+        "id": "27599f3256480d83",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "Check if control enabled",
+        "func": "msg.payload = msg.payload.split(\",\");\nif (msg.payload[1] == \"Temperature control active:False\") {\n    msg.payload = false;\n} else {\n    msg.payload = true;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 580,
+        "wires": [
+            [
+                "4e31b9c3022942b1",
+                "50f67eca0eae2c5c"
+            ]
+        ]
+    },
+    {
+        "id": "5b142c90eb79e77e",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 360,
+        "wires": [
+            [
+                "874e522792f5715e"
+            ]
+        ]
+    },
+    {
+        "id": "21d78c872a61a0c8",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 840,
+        "wires": [
+            [
+                "e06374915095bc57"
+            ]
+        ]
+    },
+    {
+        "id": "bf313765488b1ec8",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_CartridgeTemperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "c0a0767c0ae41464",
+                "8261cf5121572f26"
+            ]
+        ]
+    },
+    {
+        "id": "d9e41c5c66cfcf7e",
+        "type": "comment",
+        "z": "3f206101676928c3",
+        "name": "Update Setpoint if set e.g. by other publisher",
+        "info": "",
+        "x": 290,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "93bac4b19fa5a494",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_RingTemperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 640,
+        "wires": [
+            [
+                "0a630251035891b8",
+                "cdc16e6131a57090"
+            ]
+        ]
+    },
+    {
+        "id": "9a89d1ae8e5b3fda",
+        "type": "comment",
+        "z": "3f206101676928c3",
+        "name": "Update Setpoint if set e.g. by other publisher",
+        "info": "",
+        "x": 270,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "e8a51836d32c5918",
+        "type": "comment",
+        "z": "3f206101676928c3",
+        "name": "Extrusion pressure",
+        "info": "",
+        "x": 130,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "62be656c9ac6b369",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/CONTROLIN_Pressure",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1140,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "f20135e34519a69d",
+        "type": "ui_switch",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Pressure",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 8,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 820,
+        "y": 1080,
+        "wires": [
+            [
+                "62be656c9ac6b369"
+            ]
+        ]
+    },
+    {
+        "id": "f48fa3e481c52b26",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridgePrintHead/ACT_Pressure",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 210,
+        "y": 1360,
+        "wires": [
+            [
+                "dfc0fd34d1f2b83c",
+                "9c3e5005de05ea25"
+            ]
+        ]
+    },
+    {
+        "id": "8f599f10269875f8",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "d": true,
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/ACT_PressureOutputVoltage",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1420,
+        "wires": [
+            [
+                "aaaffd7184618d07"
+            ]
+        ]
+    },
+    {
+        "id": "b97ef6bac874c9d1",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/CONTROLOUT_Pressure",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 1080,
+        "wires": [
+            [
+                "23eb611e60a8799a"
+            ]
+        ]
+    },
+    {
+        "id": "99c5a6c04409452b",
+        "type": "ui_text_input",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Pressure Setpoint:",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 9,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 610,
+        "y": 1140,
+        "wires": [
+            [
+                "1e308c372b088941"
+            ]
+        ]
+    },
+    {
+        "id": "1e308c372b088941",
+        "type": "range",
+        "z": "3f206101676928c3",
+        "minin": "0",
+        "maxin": "10",
+        "minout": "0",
+        "maxout": "10",
+        "action": "clamp",
+        "round": false,
+        "property": "payload",
+        "name": "Limit input range",
+        "x": 800,
+        "y": 1200,
+        "wires": [
+            [
+                "4492cd5e5ff333c2",
+                "ec5381dd852768c7"
+            ]
+        ]
+    },
+    {
+        "id": "fdb0aff24970a1c4",
+        "type": "moving-average",
+        "z": "3f206101676928c3",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 840,
+        "y": 1360,
+        "wires": [
+            [
+                "e7dd3e73e4af7d14"
+            ]
+        ]
+    },
+    {
+        "id": "fd0b546e4152fe72",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "Initiate Setpoint",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 400,
+        "y": 1200,
+        "wires": [
+            [
+                "99c5a6c04409452b",
+                "1e308c372b088941"
+            ]
+        ]
+    },
+    {
+        "id": "e7dd3e73e4af7d14",
+        "type": "delay",
+        "z": "3f206101676928c3",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1070,
+        "y": 1360,
+        "wires": [
+            [
+                "67230b7702ebf517"
+            ]
+        ]
+    },
+    {
+        "id": "4492cd5e5ff333c2",
+        "type": "trigger",
+        "z": "3f206101676928c3",
+        "name": "keep setpoint on graph",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1030,
+        "y": 1300,
+        "wires": [
+            [
+                "dbaac61b63175b8a"
+            ]
+        ]
+    },
+    {
+        "id": "aaaffd7184618d07",
+        "type": "range",
+        "z": "3f206101676928c3",
+        "d": true,
+        "minin": "0",
+        "maxin": "1",
+        "minout": "0",
+        "maxout": "100",
+        "action": "scale",
+        "round": true,
+        "property": "payload",
+        "name": "Scale to percent",
+        "x": 560,
+        "y": 1420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dbaac61b63175b8a",
+        "type": "change",
+        "z": "3f206101676928c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Setpoint",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 1300,
+        "wires": [
+            [
+                "4b84d90d8793ac9d"
+            ]
+        ]
+    },
+    {
+        "id": "67230b7702ebf517",
+        "type": "change",
+        "z": "3f206101676928c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Reading",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 1360,
+        "wires": [
+            [
+                "4ac223222c67fe48",
+                "4b84d90d8793ac9d"
+            ]
+        ]
+    },
+    {
+        "id": "4ac223222c67fe48",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "round, two decimals",
+        "func": "msg.payload = msg.payload.toFixed(2); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 1420,
+        "wires": [
+            [
+                "46cff4c3bdc47051"
+            ]
+        ]
+    },
+    {
+        "id": "46cff4c3bdc47051",
+        "type": "ui_text",
+        "z": "3f206101676928c3",
+        "group": "a16fda5b837af142",
+        "order": 10,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Pressure:",
+        "format": "{{msg.payload}}Bar",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1640,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "4b84d90d8793ac9d",
+        "type": "ui_chart",
+        "z": "3f206101676928c3",
+        "name": "Pressure chart",
+        "group": "df334e7a41570950",
+        "order": 3,
+        "width": 7,
+        "height": 5,
+        "label": "Extrusion Pressure",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "60",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#e5a50a",
+            "#f9f06b",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1440,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23eb611e60a8799a",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "Check if control enabled",
+        "func": "msg.payload = msg.payload.split(\",\");\nif (msg.payload[1] == \"Pressure control active:False\") {\n    msg.payload = false;\n} else {\n    msg.payload = true;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1080,
+        "wires": [
+            [
+                "f20135e34519a69d",
+                "86999364bc63de9a"
+            ]
+        ]
+    },
+    {
+        "id": "dfc0fd34d1f2b83c",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1360,
+        "wires": [
+            [
+                "fdb0aff24970a1c4"
+            ]
+        ]
+    },
+    {
+        "id": "82ddbd36227ac0ad",
+        "type": "comment",
+        "z": "3f206101676928c3",
+        "name": "Update Setpoint if set e.g. by other publisher",
+        "info": "",
+        "x": 210,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "ec5381dd852768c7",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_Pressure",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1110,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "c13adea4705a6292",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "Initiate",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 830,
+        "y": 60,
+        "wires": [
+            [
+                "816ac37c4c5a2dee",
+                "0c333fb76fcc2738"
+            ]
+        ]
+    },
+    {
+        "id": "24b3c5878e9b2cf7",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "Initiate",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 670,
+        "y": 520,
+        "wires": [
+            [
+                "4e31b9c3022942b1",
+                "6fa80cafd20cec03"
+            ]
+        ]
+    },
+    {
+        "id": "cee0bcec73f8a1bc",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "Initiate",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 630,
+        "y": 1020,
+        "wires": [
+            [
+                "f20135e34519a69d",
+                "62be656c9ac6b369"
+            ]
+        ]
+    },
+    {
+        "id": "d508769334958c4b",
+        "type": "ui_text",
+        "z": "3f206101676928c3",
+        "group": "a16fda5b837af142",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1650,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "64844b984f96c550",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Cartridge Print Head",
+        "payloadType": "str",
+        "x": 1480,
+        "y": 20,
+        "wires": [
+            [
+                "d508769334958c4b"
+            ]
+        ]
+    },
+    {
+        "id": "1f21ea167cc328d9",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_Pressure",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1140,
+        "wires": [
+            [
+                "99c5a6c04409452b",
+                "4492cd5e5ff333c2"
+            ]
+        ]
+    },
+    {
+        "id": "f0dbdd3f37580ed4",
+        "type": "link out",
+        "z": "3f206101676928c3",
+        "name": "CartridgeControlOut",
+        "mode": "link",
+        "links": [
+            "a0f0d7dfca67b42b"
+        ],
+        "x": 865,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "50f67eca0eae2c5c",
+        "type": "link out",
+        "z": "3f206101676928c3",
+        "name": "RingControlOut",
+        "mode": "link",
+        "links": [
+            "a3f3fc9dfa4732cb"
+        ],
+        "x": 815,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "86999364bc63de9a",
+        "type": "link out",
+        "z": "3f206101676928c3",
+        "name": "PressureControlOut",
+        "mode": "link",
+        "links": [
+            "90f2a903998b360e"
+        ],
+        "x": 815,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "bb5a46632bd4efaa",
+        "type": "mqtt in",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridgePrintHead/ACT_PressureWOOFFSET",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 260,
+        "y": 1560,
+        "wires": [
+            [
+                "18a016e9f1098d1a"
+            ]
+        ]
+    },
+    {
+        "id": "18a016e9f1098d1a",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1560,
+        "wires": [
+            [
+                "c529f1eb8750a457"
+            ]
+        ]
+    },
+    {
+        "id": "c529f1eb8750a457",
+        "type": "moving-average",
+        "z": "3f206101676928c3",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 960,
+        "y": 1560,
+        "wires": [
+            [
+                "1a23b1614bd99770"
+            ]
+        ]
+    },
+    {
+        "id": "1a23b1614bd99770",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "round, four decimals",
+        "func": "msg.payload = msg.payload.toFixed(4); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 1560,
+        "wires": [
+            [
+                "faabef0b5f53a655"
+            ]
+        ]
+    },
+    {
+        "id": "6083870b138744ea",
+        "type": "delay",
+        "z": "3f206101676928c3",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1250,
+        "y": 1480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "faabef0b5f53a655",
+        "type": "ui_text",
+        "z": "3f206101676928c3",
+        "group": "eac583f53fb8b7e0",
+        "order": 12,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Raw:",
+        "format": "{{msg.payload}}Bar",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1470,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "9c3e5005de05ea25",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1640,
+        "wires": [
+            [
+                "e50ba84c742da40d"
+            ]
+        ]
+    },
+    {
+        "id": "e50ba84c742da40d",
+        "type": "moving-average",
+        "z": "3f206101676928c3",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 960,
+        "y": 1640,
+        "wires": [
+            [
+                "7d2323b3f5691ef2"
+            ]
+        ]
+    },
+    {
+        "id": "7d2323b3f5691ef2",
+        "type": "function",
+        "z": "3f206101676928c3",
+        "name": "round, four decimals",
+        "func": "msg.payload = msg.payload.toFixed(4); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 1640,
+        "wires": [
+            [
+                "28b2b619598392b6"
+            ]
+        ]
+    },
+    {
+        "id": "28b2b619598392b6",
+        "type": "ui_text",
+        "z": "3f206101676928c3",
+        "group": "eac583f53fb8b7e0",
+        "order": 12,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "with offset:",
+        "format": "{{msg.payload}}Bar",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1490,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "496e86c9f073b50f",
+        "type": "ui_text_input",
+        "z": "3f206101676928c3",
+        "name": "",
+        "label": "Offset:",
+        "tooltip": "",
+        "group": "eac583f53fb8b7e0",
+        "order": 7,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 550,
+        "y": 1780,
+        "wires": [
+            [
+                "7306b4eb6b7214f6"
+            ]
+        ]
+    },
+    {
+        "id": "7306b4eb6b7214f6",
+        "type": "mqtt out",
+        "z": "3f206101676928c3",
+        "name": "",
+        "topic": "MEWRP4/CartridePrintHead/SET_PressureOFFSET",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 860,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "77495ac17ab02653",
+        "type": "inject",
+        "z": "3f206101676928c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "",
+        "payload": "0.248",
+        "payloadType": "num",
+        "x": 450,
+        "y": 1740,
+        "wires": [
+            [
+                "7306b4eb6b7214f6"
+            ]
+        ]
+    },
+    {
+        "id": "f9716acbdf6f62df",
+        "type": "debug",
+        "z": "3f206101676928c3",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1720,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "403ce56dee80157d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a16fda5b837af142",
+        "type": "ui_group",
+        "name": "Process settings",
+        "tab": "bdf7a1de899b21bb",
+        "order": 8,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "df334e7a41570950",
+        "type": "ui_group",
+        "name": "Graphs ",
+        "tab": "3cc2b0a7694262a0",
+        "order": 6,
+        "disp": true,
+        "width": "14",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "eac583f53fb8b7e0",
+        "type": "ui_group",
+        "name": "Pressure",
+        "tab": "27d1819939b5313e",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bdf7a1de899b21bb",
+        "type": "ui_tab",
+        "name": "MEW Machine Control",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3cc2b0a7694262a0",
+        "type": "ui_tab",
+        "name": "Graphs",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "27d1819939b5313e",
+        "type": "ui_tab",
+        "name": "Debugging",
+        "icon": "dashboard",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    }
+]

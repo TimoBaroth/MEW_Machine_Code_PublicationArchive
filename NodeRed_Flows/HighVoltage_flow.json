@@ -1,0 +1,1040 @@
+[
+    {
+        "id": "22aa7bf3f6a262ef",
+        "type": "tab",
+        "label": "High voltage",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ac96aab13803ac59",
+        "type": "mqtt out",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "topic": "MEWRP4/HighVoltage/SET_HVSupplyVoltage",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1200,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b0863320d8e8438a",
+        "type": "mqtt out",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "topic": "MEWRP4/HighVoltage/CONTROLIN_HVSupply",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 1560,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "4f790c521e15e323",
+        "type": "ui_switch",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "label": "High Voltage",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 12,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1230,
+        "y": 120,
+        "wires": [
+            [
+                "b0863320d8e8438a"
+            ]
+        ]
+    },
+    {
+        "id": "6bcf3b2f664f8f15",
+        "type": "mqtt in",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "topic": "MEWRP4/HighVoltage/ACT_HVSupplyVoltage",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "186263c1bbd1ec5c"
+            ]
+        ]
+    },
+    {
+        "id": "9a6e35b6ea71dd68",
+        "type": "mqtt in",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "topic": "MEWRP4/HighVoltage/CONTROLOUT_HVSupply",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "1716c103cfe3d315"
+            ]
+        ]
+    },
+    {
+        "id": "4622302c54ecf472",
+        "type": "comment",
+        "z": "22aa7bf3f6a262ef",
+        "name": "High voltage control",
+        "info": "",
+        "x": 130,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c9c529fb9d9748d5",
+        "type": "ui_text_input",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "label": "Voltage Setpoint:",
+        "tooltip": "",
+        "group": "a16fda5b837af142",
+        "order": 13,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 710,
+        "y": 180,
+        "wires": [
+            [
+                "05b8b517b324afd0"
+            ]
+        ]
+    },
+    {
+        "id": "05b8b517b324afd0",
+        "type": "range",
+        "z": "22aa7bf3f6a262ef",
+        "minin": "0",
+        "maxin": "20",
+        "minout": "0",
+        "maxout": "20",
+        "action": "clamp",
+        "round": false,
+        "property": "payload",
+        "name": "Limit input range",
+        "x": 890,
+        "y": 240,
+        "wires": [
+            [
+                "ac96aab13803ac59",
+                "8db8b79eec39b390"
+            ]
+        ]
+    },
+    {
+        "id": "72feac2c96cbfccf",
+        "type": "moving-average",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 920,
+        "y": 360,
+        "wires": [
+            [
+                "b150faae15f6e253"
+            ]
+        ]
+    },
+    {
+        "id": "ca395c6192ab0929",
+        "type": "inject",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Initiate Setpoint",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 480,
+        "y": 240,
+        "wires": [
+            [
+                "c9c529fb9d9748d5",
+                "05b8b517b324afd0"
+            ]
+        ]
+    },
+    {
+        "id": "b150faae15f6e253",
+        "type": "delay",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1150,
+        "y": 360,
+        "wires": [
+            [
+                "3c0f293c5d3ff616"
+            ]
+        ]
+    },
+    {
+        "id": "8db8b79eec39b390",
+        "type": "trigger",
+        "z": "22aa7bf3f6a262ef",
+        "name": "keep setpoint on graph",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1110,
+        "y": 300,
+        "wires": [
+            [
+                "bcd57b74c69af8f8"
+            ]
+        ]
+    },
+    {
+        "id": "58837d95f7e6676b",
+        "type": "ui_chart",
+        "z": "22aa7bf3f6a262ef",
+        "name": "HV Chart",
+        "group": "df334e7a41570950",
+        "order": 4,
+        "width": 7,
+        "height": 5,
+        "label": "High Voltage",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "60",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#e5a50a",
+            "#f9f06b",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1500,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bcd57b74c69af8f8",
+        "type": "change",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Setpoint",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 300,
+        "wires": [
+            [
+                "58837d95f7e6676b"
+            ]
+        ]
+    },
+    {
+        "id": "3c0f293c5d3ff616",
+        "type": "change",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Reading",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 360,
+        "wires": [
+            [
+                "58837d95f7e6676b",
+                "a8570010257ab1e4"
+            ]
+        ]
+    },
+    {
+        "id": "1018f5f3e367a14f",
+        "type": "ui_text",
+        "z": "22aa7bf3f6a262ef",
+        "group": "a16fda5b837af142",
+        "order": 14,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Voltage: ",
+        "format": "{{msg.payload}}kV",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1720,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a8570010257ab1e4",
+        "type": "function",
+        "z": "22aa7bf3f6a262ef",
+        "name": "round, two decimals",
+        "func": "msg.payload = msg.payload.toFixed(2); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 420,
+        "wires": [
+            [
+                "1018f5f3e367a14f"
+            ]
+        ]
+    },
+    {
+        "id": "1716c103cfe3d315",
+        "type": "function",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Check if control enabled",
+        "func": "msg.payload = msg.payload.split(\",\");\nif (msg.payload[1] == \"HV control active:False\") {\n    msg.payload = false;\n} else {\n    msg.payload = true;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "4f790c521e15e323",
+                "39f41e0045aad07d"
+            ]
+        ]
+    },
+    {
+        "id": "186263c1bbd1ec5c",
+        "type": "function",
+        "z": "22aa7bf3f6a262ef",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 360,
+        "wires": [
+            [
+                "72feac2c96cbfccf"
+            ]
+        ]
+    },
+    {
+        "id": "3e65217038978263",
+        "type": "mqtt in",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "topic": "MEWRP4/HighVoltage/SET_HVSupplyVoltage",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "c9c529fb9d9748d5",
+                "8db8b79eec39b390"
+            ]
+        ]
+    },
+    {
+        "id": "765ef7e459949d70",
+        "type": "comment",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Update Setpoint if set e.g. by other publisher",
+        "info": "",
+        "x": 310,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "53bed15b77f46612",
+        "type": "inject",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Initiate",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 1030,
+        "y": 80,
+        "wires": [
+            [
+                "4f790c521e15e323"
+            ]
+        ]
+    },
+    {
+        "id": "d7890ee37da14ba7",
+        "type": "link in",
+        "z": "22aa7bf3f6a262ef",
+        "name": "HVControlSwitch",
+        "links": [
+            "e2dd439ea546136f"
+        ],
+        "x": 695,
+        "y": 20,
+        "wires": [
+            [
+                "8ed1da09e9c08a9f"
+            ]
+        ]
+    },
+    {
+        "id": "8ed1da09e9c08a9f",
+        "type": "switch",
+        "z": "22aa7bf3f6a262ef",
+        "name": "only pass 0",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 20,
+        "wires": [
+            [
+                "ae7c903c6bcde686"
+            ]
+        ]
+    },
+    {
+        "id": "ae7c903c6bcde686",
+        "type": "change",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 20,
+        "wires": [
+            [
+                "4f790c521e15e323",
+                "b0863320d8e8438a"
+            ]
+        ]
+    },
+    {
+        "id": "f5d896a689e286a9",
+        "type": "inject",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "High Voltage",
+        "payloadType": "str",
+        "x": 1370,
+        "y": 20,
+        "wires": [
+            [
+                "fe954f6f8cf2e372"
+            ]
+        ]
+    },
+    {
+        "id": "fe954f6f8cf2e372",
+        "type": "ui_text",
+        "z": "22aa7bf3f6a262ef",
+        "group": "a16fda5b837af142",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1530,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "39f41e0045aad07d",
+        "type": "link out",
+        "z": "22aa7bf3f6a262ef",
+        "name": "HVControlOut",
+        "mode": "link",
+        "links": [
+            "3931999e0d8218c6"
+        ],
+        "x": 865,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9d0d29233abaf008",
+        "type": "mqtt in",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "topic": "MEWRP4/HighVoltage/ACT_HVSupplyCurrent",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 240,
+        "y": 480,
+        "wires": [
+            [
+                "7a640b12b85ed923"
+            ]
+        ]
+    },
+    {
+        "id": "c223a87b978de11b",
+        "type": "ui_text",
+        "z": "22aa7bf3f6a262ef",
+        "group": "a16fda5b837af142",
+        "order": 15,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Current: ",
+        "format": "{{msg.payload}}uA",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 2040,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "7a640b12b85ed923",
+        "type": "function",
+        "z": "22aa7bf3f6a262ef",
+        "name": "remove timestamp, parse to float",
+        "func": "msg.payload = msg.payload.split(\",\");\nmsg.payload = parseFloat(msg.payload[1]);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 660,
+        "wires": [
+            [
+                "cdbd65ed16c77137"
+            ]
+        ]
+    },
+    {
+        "id": "cdbd65ed16c77137",
+        "type": "moving-average",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Moving average 0.5 sec/25samples",
+        "amount": "25",
+        "weight": "cumulative",
+        "x": 790,
+        "y": 660,
+        "wires": [
+            [
+                "9daee101fc570efc"
+            ]
+        ]
+    },
+    {
+        "id": "9daee101fc570efc",
+        "type": "function",
+        "z": "22aa7bf3f6a262ef",
+        "name": "round, four decimals",
+        "func": "msg.payload = msg.payload.toFixed(4); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 660,
+        "wires": [
+            [
+                "cc9de2836769ba76",
+                "d1a0cf009d7f6a1e"
+            ]
+        ]
+    },
+    {
+        "id": "cc9de2836769ba76",
+        "type": "ui_text",
+        "z": "22aa7bf3f6a262ef",
+        "group": "02529842903133ad",
+        "order": 12,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Raw:",
+        "format": "{{msg.payload}}uA",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1530,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "eacb29b5e8b1da4b",
+        "type": "ui_text",
+        "z": "22aa7bf3f6a262ef",
+        "group": "02529842903133ad",
+        "order": 12,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "with offset:",
+        "format": "{{msg.payload}}uA",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1950,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "5ec58fc7a043670f",
+        "type": "ui_text_input",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "label": "Offset:",
+        "tooltip": "",
+        "group": "02529842903133ad",
+        "order": 7,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 1030,
+        "y": 780,
+        "wires": [
+            [
+                "fd87010da3de0334"
+            ]
+        ]
+    },
+    {
+        "id": "f25ef8a2956cd25c",
+        "type": "inject",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "",
+        "payload": "3.15",
+        "payloadType": "num",
+        "x": 1030,
+        "y": 720,
+        "wires": [
+            [
+                "fd87010da3de0334"
+            ]
+        ]
+    },
+    {
+        "id": "72e405161ae0b359",
+        "type": "SumUltimate",
+        "z": "22aa7bf3f6a262ef",
+        "name": "Math",
+        "property": "payload",
+        "math": "sum",
+        "x": 1490,
+        "y": 780,
+        "wires": [
+            [
+                "4a92241820c81863"
+            ]
+        ]
+    },
+    {
+        "id": "d1a0cf009d7f6a1e",
+        "type": "change",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "A",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1320,
+        "y": 700,
+        "wires": [
+            [
+                "72e405161ae0b359"
+            ]
+        ]
+    },
+    {
+        "id": "fd87010da3de0334",
+        "type": "change",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "B",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1280,
+        "y": 780,
+        "wires": [
+            [
+                "72e405161ae0b359"
+            ]
+        ]
+    },
+    {
+        "id": "4a92241820c81863",
+        "type": "function",
+        "z": "22aa7bf3f6a262ef",
+        "name": "round, four decimals",
+        "func": "msg.payload = msg.payload.toFixed(4); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1700,
+        "y": 780,
+        "wires": [
+            [
+                "eacb29b5e8b1da4b",
+                "416bead61a6b131c",
+                "c223a87b978de11b"
+            ]
+        ]
+    },
+    {
+        "id": "416bead61a6b131c",
+        "type": "delay",
+        "z": "22aa7bf3f6a262ef",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1860,
+        "y": 680,
+        "wires": [
+            [
+                "c223a87b978de11b"
+            ]
+        ]
+    },
+    {
+        "id": "403ce56dee80157d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a16fda5b837af142",
+        "type": "ui_group",
+        "name": "Process settings",
+        "tab": "bdf7a1de899b21bb",
+        "order": 8,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "df334e7a41570950",
+        "type": "ui_group",
+        "name": "Graphs ",
+        "tab": "3cc2b0a7694262a0",
+        "order": 6,
+        "disp": true,
+        "width": "14",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "02529842903133ad",
+        "type": "ui_group",
+        "name": "HV",
+        "tab": "27d1819939b5313e",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bdf7a1de899b21bb",
+        "type": "ui_tab",
+        "name": "MEW Machine Control",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3cc2b0a7694262a0",
+        "type": "ui_tab",
+        "name": "Graphs",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "27d1819939b5313e",
+        "type": "ui_tab",
+        "name": "Debugging",
+        "icon": "dashboard",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,385 @@
+[
+    {
+        "id": "bca6196a7276f32f",
+        "type": "tab",
+        "label": "C-AxisConstSpeedControl",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ae9fe41b05232e49",
+        "type": "join",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "1",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1650,
+        "y": 580,
+        "wires": [
+            [
+                "437b382be7fde795"
+            ]
+        ]
+    },
+    {
+        "id": "437b382be7fde795",
+        "type": "template",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"{{payload.topic}}\":{{payload.payload}}}",
+        "output": "str",
+        "x": 1800,
+        "y": 580,
+        "wires": [
+            [
+                "defa49e1d565d063"
+            ]
+        ]
+    },
+    {
+        "id": "995abff916b52aef",
+        "type": "ui_text_input",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "label": "Effective collector radius",
+        "tooltip": "",
+        "group": "eb42c3030786965b",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "eff_collector_radius",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "str",
+        "x": 1470,
+        "y": 520,
+        "wires": [
+            [
+                "ae9fe41b05232e49"
+            ]
+        ]
+    },
+    {
+        "id": "e841e27f9228d47b",
+        "type": "inject",
+        "z": "bca6196a7276f32f",
+        "name": "initiate",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "eff_collector_radius",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 1310,
+        "y": 580,
+        "wires": [
+            [
+                "995abff916b52aef",
+                "ae9fe41b05232e49"
+            ]
+        ]
+    },
+    {
+        "id": "2a1066fad8688ea7",
+        "type": "ui_text_input",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "label": "Speed mm/min",
+        "tooltip": "",
+        "group": "eb42c3030786965b",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "mode": "number",
+        "delay": "0",
+        "topic": "c_axis_speed",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 700,
+        "y": 340,
+        "wires": [
+            [
+                "32ce93fe2ef66938",
+                "0e72dc4ed7d73939"
+            ]
+        ]
+    },
+    {
+        "id": "b7844bb26cfa64bc",
+        "type": "inject",
+        "z": "bca6196a7276f32f",
+        "name": "Initiate",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "c_axis_speed",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 630,
+        "y": 80,
+        "wires": [
+            [
+                "2a1066fad8688ea7",
+                "32ce93fe2ef66938",
+                "0e72dc4ed7d73939"
+            ]
+        ]
+    },
+    {
+        "id": "32ce93fe2ef66938",
+        "type": "mqtt out",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "topic": "CAXIS/speed_act",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 970,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "fc4cd0b1bf165202",
+        "type": "mqtt in",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "topic": "CAXIS/speed_set",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "403ce56dee80157d",
+        "nl": false,
+        "rap": true,
+        "rh": "2",
+        "inputs": 0,
+        "x": 240,
+        "y": 220,
+        "wires": [
+            [
+                "32ce93fe2ef66938",
+                "82f65a7a7a3f6e07",
+                "81ee51d4186d387d"
+            ]
+        ]
+    },
+    {
+        "id": "ac979fe398292edc",
+        "type": "comment",
+        "z": "bca6196a7276f32f",
+        "name": "speed control",
+        "info": "",
+        "x": 230,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "0e72dc4ed7d73939",
+        "type": "join",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "1",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1730,
+        "y": 420,
+        "wires": [
+            [
+                "b388a83765873b55"
+            ]
+        ]
+    },
+    {
+        "id": "b388a83765873b55",
+        "type": "template",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"{{payload.topic}}\":{{payload.payload}}}",
+        "output": "str",
+        "x": 1880,
+        "y": 420,
+        "wires": [
+            [
+                "defa49e1d565d063"
+            ]
+        ]
+    },
+    {
+        "id": "82f65a7a7a3f6e07",
+        "type": "function",
+        "z": "bca6196a7276f32f",
+        "name": "round, two decimals",
+        "func": "msg.payload = parseFloat(msg.payload.toFixed(2)); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 340,
+        "wires": [
+            [
+                "2a1066fad8688ea7"
+            ]
+        ]
+    },
+    {
+        "id": "81ee51d4186d387d",
+        "type": "change",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "c_axis_speed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 320,
+        "wires": [
+            [
+                "0e72dc4ed7d73939"
+            ]
+        ]
+    },
+    {
+        "id": "defa49e1d565d063",
+        "type": "mqtt out",
+        "z": "bca6196a7276f32f",
+        "name": "",
+        "topic": "MEWRP4/CAxis_control",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "403ce56dee80157d",
+        "x": 2130,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "eb42c3030786965b",
+        "type": "ui_group",
+        "name": "C-Axis continuous speed control",
+        "tab": "bdf7a1de899b21bb",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "403ce56dee80157d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bdf7a1de899b21bb",
+        "type": "ui_tab",
+        "name": "MEW Machine Control",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

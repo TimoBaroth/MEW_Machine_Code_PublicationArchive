@@ -1,0 +1,227 @@
+board: 6x
+name: Rotary Table MEW Machine
+meta: T.Baroth 30-01-2024
+#adjusted from example/default configuration file for 6x board, see wiki http://wiki.fluidnc.com/en/hardware/official/6x_CNC_Controller
+stepping:
+  engine: I2S_STREAM
+  idle_ms: 255
+  pulse_us: 4
+  dir_delay_us: 5
+  disable_delay_us: 5
+
+axes:
+  shared_stepper_disable_pin: NO_PIN
+  x:
+# X Axis
+    steps_per_mm: 640.000
+    max_rate_mm_per_min: 5000.000
+    acceleration_mm_per_sec2: 2000.000
+    max_travel_mm: 225.000
+    soft_limits: true
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 50.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.36:high
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      standard_stepper:
+        step_pin: I2SO.21
+        direction_pin: I2SO.20
+        disable_pin: I2SO.23
+
+  y:
+# Y Axis
+    steps_per_mm: 640.000
+    max_rate_mm_per_min: 5000.000
+    acceleration_mm_per_sec2: 2000.000
+    max_travel_mm: 225.000
+    soft_limits: true
+    homing:
+      cycle: 2
+      positive_direction: true
+      mpos_mm: 0.000
+      feed_mm_per_min: 50.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.39:high
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      standard_stepper:
+        step_pin: I2SO.18
+        direction_pin: I2SO.17
+        disable_pin: I2SO.16
+
+  z:
+# Z1 Axis
+    steps_per_mm: 800.000
+    max_rate_mm_per_min: 500.000
+    acceleration_mm_per_sec2: 100.000
+    max_travel_mm: 85.000
+    soft_limits: true
+    homing:
+      cycle: 1
+      positive_direction: true
+      mpos_mm: 85.000
+      feed_mm_per_min: 50.000
+      seek_mm_per_min: 800.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: NO_PIN
+      limit_pos_pin: gpio.32:high
+      limit_all_pin: NO_PIN
+      hard_limits: true
+      pulloff_mm: 1.000
+      standard_stepper:
+        step_pin: I2SO.5
+        direction_pin: I2SO.4:low
+        disable_pin: I2SO.7
+
+  a:
+# secondary X Axis
+    steps_per_mm: 1600.000
+    max_rate_mm_per_min: 1000.000
+    acceleration_mm_per_sec2: 100.000
+    max_travel_mm: 155.000
+    soft_limits: false
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 50.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.35:high
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      standard_stepper:
+        step_pin: I2SO.10
+        direction_pin: I2SO.9:low
+        disable_pin: I2SO.8
+
+  b:
+# Z2 Axis
+    steps_per_mm: 800.000
+    max_rate_mm_per_min: 500.000
+    acceleration_mm_per_sec2: 100.000
+    max_travel_mm: 100.000
+    soft_limits: false
+    homing:
+      cycle: 1
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 50.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.33:high
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      standard_stepper:
+        step_pin: I2SO.2
+        direction_pin: I2SO.1
+        disable_pin: I2SO.0
+
+  c:
+# C Axis
+    steps_per_mm: 74.666
+    max_rate_mm_per_min: 60000.000
+    acceleration_mm_per_sec2: 20000.000
+    max_travel_mm: 360.000
+    soft_limits: false
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 50.000
+      seek_mm_per_min: 800.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.34:high
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      standard_stepper:
+        step_pin: I2SO.13
+        direction_pin: I2SO.12:low
+        disable_pin: I2SO.15
+
+
+i2so:
+  bck_pin: gpio.22
+  data_pin: gpio.21
+  ws_pin: gpio.17
+
+spi:
+  miso_pin: gpio.19
+  mosi_pin: gpio.23
+  sck_pin: gpio.18
+
+sdcard:
+  card_detect_pin: NO_PIN
+  cs_pin: gpio.5
+
+#dummy spindle
+10V:
+  forward_pin: gpio.15
+  reverse_pin: gpio.14
+  pwm_hz: 5000
+  output_pin: gpio.13
+  enable_pin: NO_PIN
+  direction_pin: NO_PIN
+  disable_with_s0: false
+  s0_with_disable: true
+  spinup_ms: 0
+  spindown_ms: 0
+  tool_num: 0
+  speed_map: 0=0% 10000=100%
+  off_on_alarm: false
+
+
+# probe:
+  # pin: gpio.39:low
+  # toolsetter_pin: gpio.36:low
+
+# Using MOSFETs (Check Spindle Pin Usage
+# coolant:
+  # flood_pin: gpio.12
+  # mist_pin: gpio.4
+  # delay_ms: 0
+
+
+start:
+  must_home: false
+
